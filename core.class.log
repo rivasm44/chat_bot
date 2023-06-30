@@ -1,0 +1,168 @@
+[handleMsg]:  {
+  key: {
+    remoteJid: '5215549434127@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0F9D569D03D084C4590',
+    participant: undefined
+  },
+  messageTimestamp: 1688156050,
+  pushName: 'NJR',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: 'hola',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'hola',
+  from: '5215549434127'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '5215549434127@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB01742D116B059100929',
+    participant: undefined
+  },
+  messageTimestamp: 1688156053,
+  pushName: 'NJR',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: '1',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: '1',
+  from: '5215549434127'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '5215549434127@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB04A51190F4F769F1F03',
+    participant: undefined
+  },
+  messageTimestamp: 1688156058,
+  pushName: 'NJR',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: '221111',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: '221111',
+  from: '5215549434127'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '5215549434127@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB095BF062C5F2E0E0A58',
+    participant: undefined
+  },
+  messageTimestamp: 1688156061,
+  pushName: 'NJR',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: 'qwqwe',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'qwqwe',
+  from: '5215549434127'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '5215549434127@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0B0C87D291BFFBA3FD2',
+    participant: undefined
+  },
+  messageTimestamp: 1688156063,
+  pushName: 'NJR',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: 'wqeqe',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'wqeqe',
+  from: '5215549434127'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '5215549434127@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0A51775AFEA1866F254',
+    participant: undefined
+  },
+  messageTimestamp: 1688156075,
+  pushName: 'NJR',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: 'nestor@esada',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'nestor@esada',
+  from: '5215549434127'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '5215549434127@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB034B7C7D97769A07BF9',
+    participant: undefined
+  },
+  messageTimestamp: 1688156084,
+  pushName: 'NJR',
+  broadcast: false,
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      text: 'nesadasd@dsasda.com',
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'nesadasd@dsasda.com',
+  from: '5215549434127'
+}
