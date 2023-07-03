@@ -5,5 +5,5 @@ RUN npm i
 COPY . .
 ARG RAILWAY_STATIC_URL
 ARG PUBLIC_URL
-ARG PORT
+ARG 3002
 CMD ["npm", "start"]
