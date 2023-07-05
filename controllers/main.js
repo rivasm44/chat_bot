@@ -11,15 +11,13 @@ const flowPrincipal = addKeyword(["hola", "ole", "alo"]).addAnswer(
     return flowDynamic(
       `Bienvenido esta es tu oportunidad para ganar 🏆 miles de pesos en premios.
                 \nY para participar, solo deberás
-                
-                👉 Registrarte y
-                👉 Superar tus compras semanales
+                \n👉 Registrarte y\n👉 Superar tus compras semanales
                 \nRecuerda que para registrarte solicitaremos tu *Número de identificador de cliente*, Nombre, Apellido, Correo electrónico, Estado de la república
                 \n¿Estas listo(a) para iniciar? 🤔
-                \n*¡Solo escribe *Iniciar* para comenzar tu registro!*`
+                \n*¡Solo escribe el número 1 o la palabra *Registro* para empezar tu registro!*`
     );
   },
-  [flowRegistro]
+  []
 );
 
 module.exports = flowPrincipal;

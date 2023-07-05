@@ -1,5 +1,6 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
 const flowMenu = require("./menu");
+const utils = require("../utils/utils")
 
 let idCliente;
 let nombre;
@@ -17,12 +18,13 @@ const flowRegistro = addKeyword(
     "Inicio",
     "iniciar",
     "Iniciar",
+    "1"
   ],
   { sensitive: true }
 )
   .addAnswer(
     [
-      "Favor de ingresar su *Número de identificador de  cliente*, este número consta de 6 dígitos.",
+      `¿Cuál es tu número de cliente?\nConsta de 6 dígitos.`,
     ],
     { capture: true },
     async (ctx, { fallBack, endFlow }) => {
@@ -38,7 +40,7 @@ const flowRegistro = addKeyword(
           body: `Estimado participante. 😣
                     \nLe informamos que el número de identificador de cliente *${idCliente}*, proporcionado no está registrado en nuestra base de datos, por lo que le invitamos a rectificar el número correcto y volver a empezar su proceso de registro.
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
-                    \n*Sí ingresaste algún dato incorrecto puedes volver a empezar tu registro escribindo el número 1 en cualquier momento.*
+                    \n*Sí ingresaste algún dato incorrecto puedes volver a empezar tu registro escribiendo el número 1 en cualquier momento.*
                     `,
         });
       }
@@ -51,13 +53,13 @@ const flowRegistro = addKeyword(
                     \n📱 Número telefónico con terminación: *XX XXXX XX07*
                     \n📧 Correo electrónico: *xxxx@gmail.com*
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
-                    \n*Sí ingresaste algún dato incorrecto puedes volver a empezar tu registro escribindo el número 1 en cualquier momento.*`,
+                    \n*Sí ingresaste algún dato incorrecto puedes volver a empezar tu registro escribiendo el número 1 en cualquier momento.*`,
         });
       }
     }
   )
   .addAnswer(
-    "Favor de proporcionar solo su(s) *Nombre(s)*",
+    "¿Cuál es su nombre(s)?",
     { capture: true },
     (ctx, { fallBack }) => {
       nombre = ctx.body;
@@ -69,7 +71,7 @@ const flowRegistro = addKeyword(
     }
   )
   .addAnswer(
-    "Favor de proporcionar solo su(s) *Apellido(s)*",
+    "¿Cuál es su apellido(s)?",
     { capture: true },
     (ctx, { fallBack }) => {
       apellido = ctx.body;
@@ -79,13 +81,12 @@ const flowRegistro = addKeyword(
     }
   )
   .addAnswer(
-    "Favor de proporcionar el *Correo electrónico* con el que se desea realizar el registro a este curso",
+    "¿Cuál es su correo electrónico?",
     { capture: true },
     (ctx, { fallBack }) => {
       correo = ctx.body;
       const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
       const validacionCorreo = regex.test(correo);
-      console.log("Validando correo", validacionCorreo);
       if (!validacionCorreo) return fallBack();
     }
   )
@@ -93,12 +94,13 @@ const flowRegistro = addKeyword(
     "!Te deseamos mucha suerte¡ 🥇🍀🎁",
     null,
     async (ctx, { flowDynamic }) => {
+      const name = {nombre:`${nombre} ${apellido}`}
+      utils.nombre = name;
+      console.log('REGISTRO',utils.nombre);
       await flowDynamic(
-        `Tu registro a sido completado con éxito ${nombre} ${apellido} 👏
+    `Tu registro a sido completado con éxito ${utils.nombre.nombre} 👏
     \nRecuerda que:
-    \n1. Todas tus compras que superen tu objetivo semanal, sumarán puntos en tu cuenta de CAPISTRANO. Sabor que premia.
-    \n2. Tus puntos los podras cambiar por electrodomésticos, equipos electrónicos, equipos para tu negocio, remodelaciones  y más.
-    \n3. Para ser uno de los [_número de premios_] ganadores [_semanales o mensuales_], deberás ser uno de los ganadores con mayor puntaje.
+    \n1. Todas tus compras que superen tu objetivo semanal, sumarán puntos en tu cuenta de CAPISTRANO. Sabor que premia.\n2. Tus puntos los podras cambiar por electrodomésticos, equipos electrónicos, equipos para tu negocio, remodelaciones  y más.\n3. Para ser uno de los [_número de premios_] ganadores [_semanales o mensuales_], deberás ser uno de los ganadores con mayor puntaje.
     \n${nombre} ${apellido}, no dejes de participar y prepárate para  ganar con CAPISTRANO. Sabor que premia. 🎖💰
     \n¿Deseas conocer tu puntaje?
     \n*Escribe el número 0 para ingresar a tú menú principal*`
