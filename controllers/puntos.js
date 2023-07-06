@@ -17,8 +17,7 @@ const flowMenuOp3 = addKeyword(['3', 'tres', 'Tres'], { sensitive: true })
                 \n-*Total de Puntos actuales*=["$PTOS"]
                 \n🎯 Te invitamos a que realices una nueva compra, sumar puntos y aumentar tus oportunidades para ganar.\n🎯 No dejes de participar y preparate para ganar con CAPISTRANO. Sabor que premia.
                 \n¿Deseas conocer más?
-                \n👉 Cómo participar\n👉 Lista de premios\n👉 Mi puntaje\n👉 Dudas, comentarios o sugerencias
-                \n*Envía el número 0 para regresar al menú principal.* `)
+                \nEscribe *menu* para ingresar a tú menú principal.`)
             }
             if(res === 1) {
                 return flowDynamic(`[_Nombre del participante_] 🙂
@@ -30,8 +29,7 @@ const flowMenuOp3 = addKeyword(['3', 'tres', 'Tres'], { sensitive: true })
                 \n-*Total de Puntos actuales*=["$PTOS"]
                 \n🎯 Te invitamos a que realices una nueva compra, sumar puntos y aumentar tus oportunidades para ganar.\n🎯 No dejes de participar y preparate para ganar con CAPISTRANO. Sabor que premia.
                 \n¿Deseas conocer más?
-                \n👉 Cómo participar\n👉 Lista de premios\n👉 Mi puntaje\n👉 Dudas, comentarios o sugerencias
-                \n*Envía el número 0 para regresar al menú principal.* `)
+                \nEscribe *menu* para ingresar a tú menú principal.`)
             }
             else {
                 return flowDynamic(`!WOW! [_Nombre del participante_] 🤩
@@ -43,8 +41,7 @@ const flowMenuOp3 = addKeyword(['3', 'tres', 'Tres'], { sensitive: true })
                 \n-*Total de Puntos actuales*=["$PTOS"]
                 \n🎯 Te invitamos a que realices una nueva compra, sumar puntos y aumentar tus oportunidades para ganar.\n🎯 No dejes de participar y preparate para ganar con CAPISTRANO. Sabor que premia.
                 \n¿Deseas conocer más?
-                \n👉 Cómo participar\n👉 Lista de premios\n👉 Mi puntaje\n👉 Dudas, comentarios o sugerencias
-                \n*Envía el número 0 para regresar al menú principal.* `)
+                \nEscribe *menu* para ingresar a tú menú principal.`)
             }
         })
 

@@ -1,6 +1,8 @@
-const { addKeyword, addChild } = require("@bot-whatsapp/bot");
+const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
+const flowMenu = require("./menu");
 const flowRegistro = require("./registro");
-const flowPrincipal = addKeyword(["hola", "ole", "alo"]).addAnswer(
+
+const flowPrincipal = addKeyword(EVENTS.WELCOME).addAnswer(
   "🚩 CAPISTRANO. Sabor que premia 🚩",
   null,
   async (ctx, { flowDynamic }) => {
@@ -14,10 +16,9 @@ const flowPrincipal = addKeyword(["hola", "ole", "alo"]).addAnswer(
                 \n👉 Registrarte y\n👉 Superar tus compras semanales
                 \nRecuerda que para registrarte solicitaremos tu *Número de identificador de cliente*, Nombre, Apellido, Correo electrónico, Estado de la república
                 \n¿Estas listo(a) para iniciar? 🤔
-                \n*¡Solo escribe el número 1 o la palabra *Registro* para empezar tu registro!*`
+                \n¡Solo escribe la palabra *registro* para empezar tu Registro!`
     );
-  },
-  []
+  },flowRegistro
 );
 
 module.exports = flowPrincipal;
