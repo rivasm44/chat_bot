@@ -61,20 +61,23 @@ const flowRegistro = addKeyword(
     { capture: true },
     (ctx, { fallBack }) => {
       nombre = ctx.body;
-      isNumber = Number(nombre);
-      // VALIDAR TIPO DE ENTRADA NO NUMERICA
-      if (!isNaN(isNumber)) return fallBack();
+      const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g
+      const isValid = regex.test(nombre);
+      // VALIDAR CARÁCTERES
+      if (!isValid) return fallBack();
       // VALIDAR LONGITUD
       if (nombre.length < 3) return fallBack();
     }
-  )
-  .addAnswer(
-    "¿Cuál es su apellido(s)?",
-    { capture: true },
-    (ctx, { fallBack }) => {
-      apellido = ctx.body;
-      isNumber = Number(apellido);
-      if (!isNaN(isNumber)) return fallBack();
+    )
+    .addAnswer(
+      "¿Cuál es su apellido(s)?",
+      { capture: true },
+      (ctx, { fallBack }) => {
+        apellido = ctx.body;
+        const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g
+        const isValid = regex.test(apellido);
+        // VALIDAR CARÁCTERES
+        if (!isValid) return fallBack();
       if (apellido.length < 3) return fallBack();
     }
   )
@@ -87,15 +90,15 @@ const flowRegistro = addKeyword(
       const validacionCorreo = regex.test(correo);
       if (!validacionCorreo) return fallBack();
     }
-  )
-  .addAnswer(
-    "!Te deseamos mucha suerte¡ 🥇🍀🎁",
-    null,
-    async (ctx, { flowDynamic }) => {
-      const name = {nombre:`${nombre} ${apellido}`}
-      utils.nombre = name;
-      console.log('REGISTRO',utils.nombre);
-      await flowDynamic(
+    )
+    .addAnswer(
+      "!Te deseamos mucha suerte¡ 🥇🍀🎁",
+      null,
+      async (ctx, { flowDynamic }) => {
+        const name = {nombre:`${nombre} ${apellido}`}
+        utils.nombre = name;
+        console.log('REGISTRO',utils.nombre);
+        await flowDynamic(
     `Tu registro a sido completado con éxito ${utils.nombre.nombre} 👏
     \nRecuerda que:
     \n1. Todas tus compras que superen tu objetivo semanal, sumarán puntos en tu cuenta de CAPISTRANO. Sabor que premia.\n2. Tus puntos los podras cambiar por electrodomésticos, equipos electrónicos, equipos para tu negocio, remodelaciones  y más.\n3. Para ser uno de los [_número de premios_] ganadores [_semanales o mensuales_], deberás ser uno de los ganadores con mayor puntaje.
