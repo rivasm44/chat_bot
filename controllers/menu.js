@@ -4,7 +4,7 @@ const flowMenuOp2 = require('./premios')
 const flowMenuOp4 = require('./dudas')
 const utils = require("../utils/utils")
 const flowMenuOp3 = require('./puntos')
-const flowMenu = addKeyword(['menu', 'menú', 'Menu', 'Menú'], { sensitive: true })
+const flowMenu = addKeyword(['menu', 'menú', 'Menu', 'Menú'], { sensitive: false })
     .addAnswer(['Bienvenido a CAPISTRANO. Sabor que premia 🥇'],
    async (ctx, { flowDynamic}) => {
        await flowDynamic(`Hola [_Nombre del participante_] 🙂`)

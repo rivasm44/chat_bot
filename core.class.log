@@ -1,0 +1,20 @@
+[handleMsg]:  {
+  key: {
+    remoteJid: '5215622141992@s.whatsapp.net',
+    fromMe: false,
+    id: 'CA3B8FAF89F23BA5135EFFE8891D2373',
+    participant: undefined
+  },
+  messageTimestamp: 1688699823,
+  pushName: 'Mami Brows.mx  by Karen barragán',
+  broadcast: false,
+  message: Message {
+    conversation: 'Hey',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Hey',
+  from: '5215622141992'
+}

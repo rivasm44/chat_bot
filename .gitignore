@@ -1,3 +1,4 @@
 /node_modules
 /bot_sessions
 package-lock.json
+core.class.log
