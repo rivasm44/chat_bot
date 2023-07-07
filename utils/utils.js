@@ -1,11 +1,13 @@
-let data = {nombre: ''}
-let nombre = {
-    get getNombre() {
-      return this._nombre;
-    },
-  
-    set setNombre(value) {
-      data = value;
-      this._nombre = value;
-    }
-  };
+let data = { nombre: "" };
+
+function getNombre() {
+  return data.nombre;
+}
+
+function setNombre(value) {
+  data.nombre = value;
+}
+
+console.log(setNombre("Pruebas"));
+
+console.log(getNombre());
