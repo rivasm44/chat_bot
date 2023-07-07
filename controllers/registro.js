@@ -1,5 +1,6 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
-const utils = require("../utils/utils")
+const flowMenu = require("./menu");
+const utils = require("../utils/utils");
 
 let idCliente;
 let nombre;
@@ -13,10 +14,6 @@ const flowRegistro = addKeyword(
     "registrate",
     "Registrate",
     "regist",
-    "inicio",
-    "Inicio",
-    "iniciar",
-    "Iniciar",
   ],
   { sensitive: true }
 )
@@ -38,7 +35,7 @@ const flowRegistro = addKeyword(
           body: `Estimado participante. 😣
                     \nLe informamos que el número de identificador de cliente *${idCliente}*, proporcionado no está registrado en nuestra base de datos, por lo que le invitamos a rectificar el número correcto y volver a empezar su proceso de registro.
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
-                    \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *registro* en cualquier momento.
+                    \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.
                     `,
         });
       }
@@ -51,7 +48,7 @@ const flowRegistro = addKeyword(
                     \n📱 Número telefónico con terminación: *XX XXXX XX07*
                     \n📧 Correo electrónico: *xxxx@gmail.com*
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
-                    \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *registro* en cualquier momento.`,
+                    \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.`,
         });
       }
     }
@@ -103,9 +100,14 @@ const flowRegistro = addKeyword(
     \nRecuerda que:
     \n1. Todas tus compras que superen tu objetivo semanal, sumarán puntos en tu cuenta de CAPISTRANO. Sabor que premia.\n2. Tus puntos los podras cambiar por electrodomésticos, equipos electrónicos, equipos para tu negocio, remodelaciones  y más.\n3. Para ser uno de los [_número de premios_] ganadores [_semanales o mensuales_], deberás ser uno de los ganadores con mayor puntaje.
     \n${nombre} ${apellido}, no dejes de participar y prepárate para  ganar con CAPISTRANO. Sabor que premia. 🎖💰
-    \n¿Deseas conocer tu puntaje?
-    \nEscribe *menu* para ingresar a tú menú principal`
+    \n¿Deseas conocer tu puntaje?`
       );
+    }
+  ).addAnswer(
+      "Escribe *menu* para ingresar a tú menú principal",
+      { capture: true },
+      async (ctx, { gotoFlow }) => {
+        return gotoFlow(flowMenu)
     }
   );
 
