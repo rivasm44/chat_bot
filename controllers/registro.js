@@ -45,7 +45,7 @@ const flowRegistro = addKeyword(
         return endFlow({
           body: `Estimado participante. 😣
                     \nLe informamos que según nuestra base de datos el registro a este consurso ya fue realizado previamente con la siguente información.
-                    \n📅 Fecha de registro: *##/##/20##*
+                    \n📅 Fecha de registro: *${userActive.user.FECHA_REGISTRO}*
                     \n📱 Número telefónico con terminación: *${userActive.user.TELEFONO}*
                     \n📧 Correo electrónico: *${userActive.user.EMAIL}*
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
