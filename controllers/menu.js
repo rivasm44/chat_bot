@@ -13,10 +13,9 @@ const flowMenu = addKeyword(['menu', 'menú', 'Menu', 'Menú'], { sensitive: tru
     ],
         async (ctx, { flowDynamic }) => {
             await flowDynamic(`Hola [_Nombre del participante_] 🙂`)
-        }).addAnswer(`\n*Envía el número del que deseas más información.* `,
+        }).addAnswer(`*Envía el número del que deseas más información.* `,
             { capture: true }, async (ctx, { gotoFlow }) => {
                 if (ctx.body != '1' && ctx.body != '2' && ctx.body != '3' && ctx.body != '4') {
-                    console.log(ENTRO);
                     return gotoFlow(flowMenu)
                 }
             }, [flowMenuOp1, flowMenuOp2, flowMenuOp3, flowMenuOp4])

@@ -1,6 +1,7 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
 const flowMenu = require("./menu");
 const utils = require("../utils/utils");
+const { addRegister } = require("../reposotori/firestore");
 
 let idCliente;
 let nombre;
@@ -22,7 +23,7 @@ const flowRegistro = addKeyword(
       `¿Cuál es tu número de cliente?\nConsta de 6 dígitos.`,
     ],
     { capture: true },
-    async (ctx, { fallBack, endFlow}) => {
+    async (ctx, { fallBack, endFlow }) => {
       idCliente = ctx.body;
       // VALIDAR LONGITUD
       if (idCliente.length < 6 || idCliente.length > 6) return fallBack();
@@ -65,16 +66,16 @@ const flowRegistro = addKeyword(
       // VALIDAR LONGITUD
       if (nombre.length < 3) return fallBack();
     }
-    )
-    .addAnswer(
-      "¿Cuál es su apellido(s)?",
-      { capture: true },
-      (ctx, { fallBack }) => {
-        apellido = ctx.body;
-        const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g
-        const isValid = regex.test(apellido);
-        // VALIDAR CARÁCTERES
-        if (!isValid) return fallBack();
+  )
+  .addAnswer(
+    "¿Cuál es su apellido(s)?",
+    { capture: true },
+    (ctx, { fallBack }) => {
+      apellido = ctx.body;
+      const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g
+      const isValid = regex.test(apellido);
+      // VALIDAR CARÁCTERES
+      if (!isValid) return fallBack();
       if (apellido.length < 3) return fallBack();
     }
   )
@@ -87,27 +88,36 @@ const flowRegistro = addKeyword(
       const validacionCorreo = regex.test(correo);
       if (!validacionCorreo) return fallBack();
     }
-    )
-    .addAnswer(
-      "!Te deseamos mucha suerte¡ 🥇🍀🎁",
-      null,
-      async (ctx, { flowDynamic }) => {
-        const name = {nombre:`${nombre} ${apellido}`}
-        utils.nombre = name;
-        console.log('REGISTRO',utils.nombre);
-        await flowDynamic(
-    `Tu registro a sido completado con éxito ${utils.nombre.nombre} 👏
+  )
+  .addAnswer(
+    "!Te deseamos mucha suerte¡ 🥇🍀🎁",
+    null,
+    async (ctx, { flowDynamic }) => {
+      const name = { nombre: `${nombre} ${apellido}` }
+      utils.nombre = name;
+      console.log('REGISTRO', utils.nombre);
+      const registro = await addRegister(
+        "Pruebas",
+        correo,
+        idCliente,
+        utils.nombre,
+        ctx.pushName,
+        ctx.from
+      );
+      console.log("Nuevo Registro ---->", registro);
+      await flowDynamic(
+        `Tu registro a sido completado con éxito ${utils.nombre.nombre} 👏
     \nRecuerda que:
     \n1. Todas tus compras que superen tu objetivo semanal, sumarán puntos en tu cuenta de CAPISTRANO. Sabor que premia.\n2. Tus puntos los podras cambiar por electrodomésticos, equipos electrónicos, equipos para tu negocio, remodelaciones  y más.\n3. Para ser uno de los [_número de premios_] ganadores [_semanales o mensuales_], deberás ser uno de los ganadores con mayor puntaje.
-    \n${nombre} ${apellido}, no dejes de participar y prepárate para  ganar con CAPISTRANO. Sabor que premia. 🎖💰
+    \n${utils.nombre}, no dejes de participar y prepárate para  ganar con CAPISTRANO. Sabor que premia. 🎖💰
     \n¿Deseas conocer tu puntaje?`
       );
     }
   ).addAnswer(
-      "Escribe *menu* para ingresar a tú menú principal",
-      { capture: true },
-      async (ctx, { gotoFlow }) => {
-        return gotoFlow(flowMenu)
+    "Escribe *menu* para ingresar a tú menú principal",
+    { capture: true },
+    async (ctx, { gotoFlow }) => {
+      return gotoFlow(flowMenu)
     }
   );
 
