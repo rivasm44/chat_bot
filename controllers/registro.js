@@ -1,7 +1,11 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
 const flowMenu = require("./menu");
 const utils = require("../utils/utils");
-const { addRegister } = require("../reposotori/firestore");
+const {
+  addRegister,
+  getUserActive,
+  validateId,
+} = require("../reposotori/firestore");
 
 let idCliente;
 let nombre;
@@ -9,19 +13,11 @@ let apellido;
 let correo;
 let isNumber;
 const flowRegistro = addKeyword(
-  [
-    "registro",
-    "Registro",
-    "registrate",
-    "Registrate",
-    "regist",
-  ],
+  ["registro", "Registro", "registrate", "Registrate", "regist"],
   { sensitive: true }
 )
   .addAnswer(
-    [
-      `¿Cuál es tu número de cliente?\nConsta de 6 dígitos.`,
-    ],
+    [`¿Cuál es tu número de cliente?\nConsta de 6 dígitos.`],
     { capture: true },
     async (ctx, { fallBack, endFlow }) => {
       idCliente = ctx.body;
@@ -31,7 +27,11 @@ const flowRegistro = addKeyword(
       // VALIDAR TIPO NUMERICO
       if (isNaN(isNumber)) return fallBack();
       // VALIDACIÓN SÍ EXISTE BD
-      if (ctx.body == "112233") {
+      const isValida = await validateId(idCliente);
+
+      const userActive = await getUserActive("ID", idCliente);
+
+      if (!isValida.activo) {
         return endFlow({
           body: `Estimado participante. 😣
                     \nLe informamos que el número de identificador de cliente *${idCliente}*, proporcionado no está registrado en nuestra base de datos, por lo que le invitamos a rectificar el número correcto y volver a empezar su proceso de registro.
@@ -41,13 +41,13 @@ const flowRegistro = addKeyword(
         });
       }
       // VALIDACIÓN SÍ ESTATUS BD
-      if (ctx.body == "112266") {
+      if (userActive.activo) {
         return endFlow({
           body: `Estimado participante. 😣
                     \nLe informamos que según nuestra base de datos el registro a este consurso ya fue realizado previamente con la siguente información.
                     \n📅 Fecha de registro: *##/##/20##*
-                    \n📱 Número telefónico con terminación: *XX XXXX XX07*
-                    \n📧 Correo electrónico: *xxxx@gmail.com*
+                    \n📱 Número telefónico con terminación: *${userActive.user.TELEFONO}*
+                    \n📧 Correo electrónico: *${userActive.user.EMAIL}*
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
                     \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.`,
         });
@@ -59,7 +59,8 @@ const flowRegistro = addKeyword(
     { capture: true },
     (ctx, { fallBack }) => {
       nombre = ctx.body;
-      const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g
+      const regex =
+        /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
       const isValid = regex.test(nombre);
       // VALIDAR CARÁCTERES
       if (!isValid) return fallBack();
@@ -72,7 +73,8 @@ const flowRegistro = addKeyword(
     { capture: true },
     (ctx, { fallBack }) => {
       apellido = ctx.body;
-      const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g
+      const regex =
+        /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
       const isValid = regex.test(apellido);
       // VALIDAR CARÁCTERES
       if (!isValid) return fallBack();
@@ -93,14 +95,14 @@ const flowRegistro = addKeyword(
     "!Te deseamos mucha suerte¡ 🥇🍀🎁",
     null,
     async (ctx, { flowDynamic }) => {
-      const name = { nombre: `${nombre} ${apellido}` }
+      const name = { nombre: `${nombre} ${apellido}` };
       utils.nombre = name;
-      console.log('REGISTRO', utils.nombre);
+      console.log("REGISTRO", utils.nombre);
       const registro = await addRegister(
-        "Pruebas",
+        apellido,
         correo,
         idCliente,
-        utils.nombre,
+        nombre,
         ctx.pushName,
         ctx.from
       );
@@ -113,11 +115,12 @@ const flowRegistro = addKeyword(
     \n¿Deseas conocer tu puntaje?`
       );
     }
-  ).addAnswer(
+  )
+  .addAnswer(
     "Escribe *menu* para ingresar a tú menú principal",
     { capture: true },
     async (ctx, { gotoFlow }) => {
-      return gotoFlow(flowMenu)
+      return gotoFlow(flowMenu);
     }
   );
 

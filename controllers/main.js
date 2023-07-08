@@ -2,27 +2,16 @@ const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
 const flowRegistro = require("./registro");
 const flowMenu = require("./menu");
 const {
-  addRegister,
   getUserActive,
-  validateId,
 } = require("../reposotori/firestore");
 
 const flowPrincipal = addKeyword(EVENTS.WELCOME).addAnswer(
   "🚩 CAPISTRANO. Sabor que premia 🚩",
   null,
   async (ctx, { gotoFlow }) => {
-    const userActive = await getUserActive(ctx.from);
+    const userActive = await getUserActive("TELEFONO",ctx.from);
     console.log("Usuario activo ---->", userActive);
     
-    /* const registro = await addRegister(
-      "Pruebas",
-      "pruebas@gmail.com",
-      "112233",
-      "Juanito Banana",
-      ctx.pushName,
-      ctx.from
-      );
-      console.log("Nuevo Registro ---->", registro); */
       console.log("userActive.activo ---->", userActive.activo);
     if (userActive.activo) await gotoFlow(flowMenu)
   }).addAnswer(

@@ -31,23 +31,23 @@ const addRegister = async (
   return snapshot;
 };
 
-const getUserActive = async (phone) => {
+const getUserActive = async (file, phone) => {
   try {
     let user = {};
     const snapshot = await db
       .collection("usuarios")
-      .where("TELEFONO", "==", phone)
+      .where(file, "==", phone)
       .get();
 
     if (snapshot.empty) {
-      console.log(`No matching documents ----> ${phone}`);
+      console.log(`Registro no encontrado ----> ${phone}`);
       return { activo: false, user };
     }
     snapshot.forEach((doc) => {
       console.log(`Información del usuario ---> ${doc.id}, =>, ${doc.data()}`);
       user = doc.data();
     });
-    return { activo: true, user };
+    return { activo: Object.keys(user).length > 0, user };
   } catch (e) {
     console.log(`Ocurrio un error en getUserActive -->, ${e.message}`);
     return { activo: false, user };
@@ -70,7 +70,7 @@ const validateId = async (id) => {
       console.log(`Información del registro ---> ${doc.id}, =>, ${doc.data()}`);
       registro = doc.data();
     });
-    return { activo: true, registro };
+    return { activo: Object.keys(registro).length > 0, registro };
   } catch (e) {
     console.log(`Ocurrio un error en validatePreregistro -->, ${e.message}`);
     return { activo: false, registro };
