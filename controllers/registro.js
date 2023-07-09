@@ -16,7 +16,10 @@ let isNumber;
 const mask = function (params) {
   if (params.includes("@")) {
     const index = params.indexOf("@");
-    const correo = "xxxxx" + params.substring(index, params.length);
+    const prt1 = params.substring(0, 1);
+    const prt2 = params.substring(index-1,index);
+    const prt3 = params.substring(index, params.length);
+    const correo = prt1 +"xxxxx"+ prt2 + prt3;
     return correo;
   } else
     return "xx xxxx xx" + params.substring(params.length - 2, params.length);
@@ -55,10 +58,8 @@ const flowRegistro = addKeyword(
           body: `Estimado participante. 😣
                     \nLe informamos que según nuestra base de datos el registro a este consurso ya fue realizado previamente con la siguente información.
                     \n📅 Fecha de registro: *${userActive.user.FECHA_REGISTRO}*
-                    \n📱 Número telefónico con terminación: *${mask(
-                      userActive.user.EMAIL
-                    )}*
-                    \n✉ Correo electrónico: *${mask(userActive.user.TELEFONO)}*
+                    \n📱 Número telefónico con terminación: *${mask(userActive.user.TELEFONO)}*
+                    \n✉ Correo electrónico: *${mask(userActive.user.EMAIL)}*
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
                     \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.`,
         });
