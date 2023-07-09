@@ -14,12 +14,13 @@ let correo;
 let isNumber;
 
 const mask = function (params) {
-  if (params.includes('@')) {
-    const index = params.indexOf('@');
-    const correo = 'xxxxx' + params.substring(index,params.length);
-    return correo; 
-  } else return 'xx xxxx xx' + params.substring(params.length-2, params.length);
-}
+  if (params.includes("@")) {
+    const index = params.indexOf("@");
+    const correo = "xxxxx" + params.substring(index, params.length);
+    return correo;
+  } else
+    return "xx xxxx xx" + params.substring(params.length - 2, params.length);
+};
 
 const flowRegistro = addKeyword(
   ["registro", "Registro", "registrate", "Registrate", "regist"],
@@ -54,7 +55,9 @@ const flowRegistro = addKeyword(
           body: `Estimado participante. 😣
                     \nLe informamos que según nuestra base de datos el registro a este consurso ya fue realizado previamente con la siguente información.
                     \n📅 Fecha de registro: *${userActive.user.FECHA_REGISTRO}*
-                    \n📱 Número telefónico con terminación: *${mask(userActive.user.EMAIL)}*
+                    \n📱 Número telefónico con terminación: *${mask(
+                      userActive.user.EMAIL
+                    )}*
                     \n✉ Correo electrónico: *${mask(userActive.user.TELEFONO)}*
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
                     \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.`,
@@ -116,10 +119,10 @@ const flowRegistro = addKeyword(
       );
       console.log("Nuevo Registro ---->", registro);
       await flowDynamic(
-        `Tu registro a sido completado con éxito ${utils.nombre.nombre} 👏
+        `Tu registro a sido completado con éxito *${nombre}* 👏
     \nRecuerda que:
     \n1. Todas tus compras que superen tu objetivo semanal, sumarán puntos en tu cuenta de CAPISTRANO. Sabor que premia.\n2. Tus puntos los podras cambiar por electrodomésticos, equipos electrónicos, equipos para tu negocio, remodelaciones  y más.\n3. Para ser uno de los [_número de premios_] ganadores [_semanales o mensuales_], deberás ser uno de los ganadores con mayor puntaje.
-    \n${utils.nombre}, no dejes de participar y prepárate para  ganar con CAPISTRANO. Sabor que premia. 🎖💰
+    \n*${nombre}*, no dejes de participar y prepárate para  ganar con CAPISTRANO. Sabor que premia. 🎖💰
     \n¿Deseas conocer tu puntaje?`
       );
     }
