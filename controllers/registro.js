@@ -12,6 +12,15 @@ let nombre;
 let apellido;
 let correo;
 let isNumber;
+
+const mask = function (params) {
+  if (params.includes('@')) {
+    const index = params.indexOf('@');
+    const correo = 'xxxxx' + params.substring(index,params.length);
+    return correo; 
+  } else return 'xx xxxx xx' + params.substring(params.length-2, params.length);
+}
+
 const flowRegistro = addKeyword(
   ["registro", "Registro", "registrate", "Registrate", "regist"],
   { sensitive: true }
@@ -36,8 +45,7 @@ const flowRegistro = addKeyword(
           body: `Estimado participante. 😣
                     \nLe informamos que el número de identificador de cliente *${idCliente}*, proporcionado no está registrado en nuestra base de datos, por lo que le invitamos a rectificar el número correcto y volver a empezar su proceso de registro.
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
-                    \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.
-                    `,
+                    \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.`,
         });
       }
       // VALIDACIÓN SÍ ESTATUS BD
@@ -46,8 +54,8 @@ const flowRegistro = addKeyword(
           body: `Estimado participante. 😣
                     \nLe informamos que según nuestra base de datos el registro a este consurso ya fue realizado previamente con la siguente información.
                     \n📅 Fecha de registro: *${userActive.user.FECHA_REGISTRO}*
-                    \n📱 Número telefónico con terminación: *${userActive.user.TELEFONO}*
-                    \n📧 Correo electrónico: *${userActive.user.EMAIL}*
+                    \n📱 Número telefónico con terminación: *${mask(userActive.user.EMAIL)}*
+                    \n✉ Correo electrónico: *${mask(userActive.user.TELEFONO)}*
                     \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
                     \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.`,
         });
