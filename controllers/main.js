@@ -21,7 +21,7 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME).addAnswer(
       \nRecuerda que para registrarte solicitaremos tu *Número de identificador de cliente*, Nombre, Apellido, Correo electrónico, Estado de la república
       \n¿Estas listo(a) para iniciar? 🤔
       \n¡Solo escribe la palabra *registro* para empezar tu Registro!`
-      ,{ capture: true },(ctx,{fallBack})=> {
+      ,{ capture: true },(ctx,{fallBack, endFlow})=> {
         if (ctx.body != 'MENU' && ctx.body != 'MENÚ') {
           return endFlow({
             body: `Estimado participante necesitas de un registro para entrar al menú. 😣`,
