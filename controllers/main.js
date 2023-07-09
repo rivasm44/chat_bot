@@ -9,7 +9,7 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME).addAnswer(
   "CAPISTRANO. Sabor que premia 🎁",
   null,
   async (ctx, { gotoFlow }) => {
-    const userActive = await getUserActive("TELEFONO",ctx.from);
+    const userActive = await getUserActive("TELEFONO",'5215549434121');
     console.log("Usuario activo ---->", userActive);
     
       console.log("userActive.activo ---->", userActive.activo);
@@ -22,11 +22,11 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME).addAnswer(
       \n¿Estas listo(a) para iniciar? 🤔
       \n¡Solo escribe la palabra *registro* para empezar tu Registro!`
       ,{ capture: true },(ctx,{fallBack, endFlow})=> {
-        if (ctx.body != 'MENU' && ctx.body != 'MENÚ') {
-          return endFlow({
-            body: `Estimado participante necesitas de un registro para entrar al menú. 😣`,
-          });
-        }
+        // if (ctx.body != 'MENU' && ctx.body != 'MENÚ') {
+        //   return endFlow({
+        //     body: `Estimado participante necesitas de un registro para entrar al menú. 😣`,
+        //   });
+        // }
         if (ctx.body.toUpperCase() != 'REGISTRO'&&ctx.body.toUpperCase() != 'REGISTRATE') return fallBack()
       },[flowRegistro, flowMenu]
   );
