@@ -1,5 +1,6 @@
 /node_modules
 /bot_sessions
+/config/credentials.json
 package-lock.json
 core.class.log
 .DS_Store
