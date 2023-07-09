@@ -29,7 +29,7 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
           body: `Estimado participante necesitas de un registro para entrar al menú. 😣`,
         });
       }
-      if (ctx.body.toUpperCase().includes("REGIST")) return fallBack();
+      if (!ctx.body.toUpperCase().includes("REGI")) return fallBack();
     },
     [flowRegistro, flowMenu]
   );
