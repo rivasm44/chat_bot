@@ -4,9 +4,11 @@ const flowMenuOp2 = require('./premios')
 const flowMenuOp4 = require('./dudas')
 const flowMenuOp3 = require('./puntos')
 const { getUserActive } = require('../reposotori/firestore')
-const flowMenu = addKeyword(['menu', 'menú', 'Menu', 'Menú'], { sensitive: true })
+const flowMenu = addKeyword(['menu', 'menú', 'Menu', 'Menú', 'M', 'm'], { sensitive: true })
     .addAnswer(['Te invitamos a revisar nuestro menu. 🙌']
-        , null
+        , {
+            media: 'http://agsit.com.mx/wp-content/uploads/2023/07/imageedit_2_9082779197.png',
+          }
         , async (ctx, { flowDynamic }) => {
             const userActive = await getUserActive("TELEFONO", ctx.from);
             // const userActive = await getUserActive("TELEFONO", '5215549434188');

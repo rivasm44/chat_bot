@@ -4,6 +4,6 @@ const flowMenuOp1 = addKeyword(['1', 'uno', 'participar'])
                 \n🎯 Tus puntos los podrás canjear por electrodomésticos, equipos electrónicos, equipo para tu negocio y más.
                 \n🎯 Los distribuidores con mayor puntaje (cada semana y al finalizar la dinámica) serán los ganadores.
                 \n¿Deseas conocer más? 🤔 
-                \nEscribe *menu* para ingresar a tú menú principal.`) 
+                \nEscribe *menu* o la letra *m* para ingresar a tú menú principal.`) 
 
 module.exports = flowMenuOp1

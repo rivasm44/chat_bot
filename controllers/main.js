@@ -3,16 +3,47 @@ const flowRegistro = require("./registro");
 const flowMenu = require("./menu");
 const { getUserActive } = require("../reposotori/firestore");
 
+
+const templateButtons = [
+  {
+      index: 1,
+      urlButton: {
+          displayText: ':star: Star Baileys on GitHub!',
+          url: 'https://github.com/adiwajshing/Baileys',
+      },
+  },
+  { 
+      index: 2, 
+      callButton: { 
+          displayText: 'Call me!', 
+          phoneNumber: '+1 (234) 5678-901' 
+        } 
+  },
+  {
+      index: 3,
+      quickReplyButton: {
+          displayText: 'This is a reply, just like normal buttons!',
+          id: 'id-like-buttons-message',
+      },
+  },
+]
+
+
 const flowPrincipal = addKeyword(EVENTS.WELCOME)
   .addAnswer(
-    "CAPISTRANO. Sabor que premia 🎁",
-    null,
+    "*CAPISTRANO, Sabor que premia* 🎁",
+    {
+      media: 'http://agsit.com.mx/wp-content/uploads/2023/07/imageedit_2_9082779197.png',
+ 
+    },
     async (ctx, { gotoFlow }) => {
+
       const userActive = await getUserActive("TELEFONO", ctx.from);
       console.log("Usuario activo ---->", userActive);
 
       console.log("userActive.activo ---->", userActive.activo);
       if (userActive.activo) await gotoFlow(flowMenu);
+
     }
   )
   .addAnswer(
