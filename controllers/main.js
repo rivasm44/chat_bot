@@ -16,17 +16,19 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
     }
   )
   .addAnswer(
-    `Bienvenido esta es tu oportunidad para ganar 🏆 miles de pesos en premios.
-      \nY para participar, solo deberás
+    `Bienvenido (a) a *CAPISTRANO. Sabor que premia*. 🥳🥳🥳
+      \nEsta es tu oportunidad para ganar miles de pesos en premios. 🏆 🏆 🏆
+      \nPara participar solo deberás:
       \n👉 Registrarte y\n👉 Superar tus compras semanales
-      \nRecuerda que para registrarte solicitaremos tu Número de identificador de cliente, Nombre, Apellido, Correo electrónico, Estado de la república
-      \n¿Estas listo(a) para iniciar? 🤔
-      \n¡Solo escribe la palabra registro para empezar tu Registro!`,
+      \nPara registrarte necesitarás:
+      \n1️⃣Número de cliente Capistrano.\n2️⃣Nombre completo.\n3️⃣Correo electrónico.      
+      \n¿Estas listo(a) para iniciar? 🏁🏎️
+      \nSolo escribe la palabra *registro* para comenzar. 🥳🥳🥳`,
     { capture: true },
     (ctx, { fallBack, endFlow }) => {
       if (ctx.body.toUpperCase().includes("MEN")) {
         return endFlow({
-          body: `Estimado participante necesitas de un registro para entrar al menú. 😣`,
+          body: `Ups… No pudimos procesar tu solicitud. 😰 Recuerda que primero debes registrarte para participar. 📝`,
         });
       }
       if (!ctx.body.toUpperCase().includes("REGI")) return fallBack();

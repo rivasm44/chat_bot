@@ -36,7 +36,10 @@ const flowRegistro = addKeyword([
   "Regis",
 ])
   .addAnswer(
-    [`¿Cuál es tu número de cliente?\nConsta de 6 dígitos.`],
+    [
+      'Paso 1 de 3.'
+      ,'Por favor ingresa tu número de cliente Capistrano a *6 dígitos*. 🔢'
+    ],
     { capture: true },
     async (ctx, { fallBack, endFlow }) => {
       idCliente = ctx.body;
@@ -61,21 +64,21 @@ const flowRegistro = addKeyword([
       // VALIDACIÓN SÍ ESTATUS BD
       if (userActive.activo) {
         return endFlow({
-          body: `Estimado participante. 😣
-                    \nLe informamos que según nuestra base de datos el registro a este consurso ya fue realizado previamente con la siguente información.
-                    \n📅 Fecha de registro: *${userActive.user.FECHA_REGISTRO}*
-                    \n📱 Número telefónico con terminación: *${mask(
-                      userActive.user.TELEFONO
-                    )}*
-                    \n✉ Correo electrónico: *${mask(userActive.user.EMAIL)}*
-                    \nEn caso de que sea un error, le invitamos a contactar a nuestro equipo de atención a clientes enviando un correo electrónico a xxxx@capistrano.com para que su número sea dado de alta.
-                    \nSí ingresaste algún dato incorrecto puedes volver a empezar escribiendo *incio* en cualquier momento.`,
+          body: `Ups… Detectamos que tu número de distribuidor está vinculado con otro número telefónico 😱
+                    \n📆Fecha de registro: *${userActive.user.FECHA_REGISTRO}*
+                    \n📱Número telefónico registrado (terminación): *${mask(userActive.user.TELEFONO)}*
+                    \n📩Correo electrónico (terminación): *${mask(userActive.user.EMAIL)}*
+                    \nSi deseas que revisemos o actualicemos tu registro, por favor escríbenos a info@saborquepremia.mx y nuestro equipo de atención a clientes te apoyará. 📩👌`
         });
       }
     }
   )
   .addAnswer(
-    "¿Cuál es su nombre(s)?",
+    [
+      'Excelente, pasemos al paso 2 de 3: Registrar tu nombre. 👍'
+      ,'Por favor ingresa solo tu primer nombre (_sin apellido_). 📝'
+    ]
+    ,
     { capture: true },
     (ctx, { fallBack }) => {
       nombre = ctx.body;
@@ -89,7 +92,10 @@ const flowRegistro = addKeyword([
     }
   )
   .addAnswer(
-    "¿Cuál es su apellido(s)?",
+    [
+      'Vamos super bien. 🥳'
+      ,'Ahora, por favor ingresa solo tu primer apellido. 📝'
+    ],
     { capture: true },
     (ctx, { fallBack }) => {
       apellido = ctx.body;
@@ -102,7 +108,10 @@ const flowRegistro = addKeyword([
     }
   )
   .addAnswer(
-    "¿Cuál es su correo electrónico?",
+    [
+      '¡Listo! Estamos en el paso 3 de 3. 🥳'
+      ,'Por favor ingresa tu correo electrónico. 📩👌'
+    ],
     { capture: true },
     (ctx, { fallBack }) => {
       correo = ctx.body;
@@ -112,7 +121,7 @@ const flowRegistro = addKeyword([
     }
   )
   .addAnswer(
-    "!Te deseamos mucha suerte¡ 🥇🍀🎁",
+    "¡Felicidades, tu registro fue completado con éxito! 🥳",
     null,
     async (ctx, { flowDynamic }) => {
       const name = { nombre: `${nombre} ${apellido}` };
@@ -128,16 +137,32 @@ const flowRegistro = addKeyword([
       );
       console.log("Nuevo Registro ---->", registro);
       await flowDynamic(
-        `Tu registro a sido completado con éxito *${nombre}* 👏
-    \nRecuerda que:
-    \n1. Todas tus compras que superen tu objetivo semanal, sumarán puntos en tu cuenta de CAPISTRANO. Sabor que premia.\n2. Tus puntos los podras cambiar por electrodomésticos, equipos electrónicos, equipos para tu negocio, remodelaciones  y más.\n3. Para ser uno de los [_número de premios_] ganadores [_semanales o mensuales_], deberás ser uno de los ganadores con mayor puntaje.
-    \n*${nombre}*, no dejes de participar y prepárate para  ganar con CAPISTRANO. Sabor que premia. 🎖💰
-    \n¿Deseas conocer tu puntaje?`
+        `Y recuerda: 
+        \n1️⃣CAPISTRANO. Sabor que premia inicia el 17 de julio y terminará el 10 de septiembre; es decir 8 semanas o 2 meses.\n2️⃣Tendremos ganadores semanales y ganadores al finalizar la dinámica.\n3️⃣Nuestra meta es recompensar tus compras, por lo que al superar tus objetivos semanales, recibirás puntos. \n 4️⃣Los distribuidores con mayor puntaje (cada semana y al finalizar la dinámica) serán los ganadores.\n5️⃣Habrá premios para tu hogar y negocio, por ejemplo:
+        \n- Básculas de plataforma
+        \n- Baterías de cocina de 15, 18, 38, 49 pzs, y kits de 4 cuchillos.  
+        \n- Bicicletas 29”
+        \n- Bocinas Alexa echo dot 5ta generación y Party box
+        \n- Cajas registradoras
+        \n- Freidoras de Aire
+        \n- Frigobares / Enfriadores de bebidas
+        \n- Grills (parrilla a carbón)
+        \n- Laptops 15.6”
+        \n- Motocicletas de trabajo 110CC y 125CC, y deportivas 200CC
+        \n- Pantallas LED 55”
+        \n- Rebanadoras de carnes frías
+        \n- Tablets 10.4"
+        \n- Vitrinas para refrigerar`
       );
     }
   )
   .addAnswer(
-    "Escribe *menu* para ingresar a tú menú principal",
+    [
+      'Finalmente, si tienes alguna pregunta, no dudes en contactarnos:'
+      ,'1️⃣ Escríbenos al correo info@saborquepremia.mx'
+      ,'2️⃣ Visita saborquepremia.mx o'
+      ,'3️⃣ Escribe *Menú* en este chat. 🥳'
+    ],
     { capture: true },
     async (ctx, { gotoFlow }) => {
       return gotoFlow(flowMenu);
