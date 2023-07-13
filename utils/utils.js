@@ -8,10 +8,6 @@ function setNombre(value) {
   data.nombre = value;
 }
 
-console.log(setNombre("Pruebas"));
-
-console.log(getNombre());
-
 const changeTimezone = (date, ianatz) => {
   var invdate = new Date(
     date.toLocaleString("en-US", {

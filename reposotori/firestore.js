@@ -103,4 +103,19 @@ const getAccumulated = async (id) => {
   }
 };
 
-module.exports = { addRegister, getUserActive, getAccumulated, validateId };
+const getAllUsers = async () => {
+  try {
+    return await db.collection("usuarios").get();
+  } catch (error) {
+    console.log(`Ocurrio un error en getAllUsers -->, ${e.message}`);
+    return { valid: false, metricas: {} };
+  }
+};
+
+module.exports = {
+  addRegister,
+  getAllUsers,
+  getUserActive,
+  getAccumulated,
+  validateId,
+};
