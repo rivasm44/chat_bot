@@ -5,28 +5,33 @@ const MockAdapter = require("@bot-whatsapp/database/mock");
 const FlowMain = require("./controllers/main");
 const { sendMessages } = require("./controllers/sendNotifications");
 
-const main = async () => {
-  const adapterDB = new MockAdapter();
-  const adapterFlow = createFlow([FlowMain]);
-  const adapterProvider = createProvider(BaileysProvider);
+try {
+  const main = async () => {
+    const adapterDB = new MockAdapter();
+    const adapterFlow = createFlow([FlowMain]);
+    const adapterProvider = createProvider(BaileysProvider);
 
-  createBot({
-    flow: adapterFlow,
-    provider: adapterProvider,
-    database: adapterDB,
-  });
+    createBot({
+      flow: adapterFlow,
+      provider: adapterProvider,
+      database: adapterDB,
+    });
 
-  const PORT_CAT = process.env.PORT || 3001;
+    const PORT_CAT = process.env.PORT || 3000;
 
-  QRPortalWeb({ port: PORT_CAT });
+    QRPortalWeb({ port: PORT_CAT });
 
-  const express = require("express");
-  const app = express();
-  app.get("/send-message-bot", async (req, res) => {
-    sendMessages(req, res, adapterProvider);
-  });
-  const PORT = process.env.PORT || 3002;
-  app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
-};
+    const express = require("express");
+    const app = express();
+    app.get("/send-message-bot", async (req, res) => {
+      sendMessages(req, res, adapterProvider);
+    });
+    const PORT = 3002;
+    app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+  };
 
-main();
+  main();
+} catch (error) {
+  console.log("Error ------>");
+  console.log(error);
+}

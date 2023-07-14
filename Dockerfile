@@ -1,9 +1,11 @@
-FROM node:18-bullseye as bot
+FROM node:latest AS node_base
+
+RUN echo "NODE Version:" && node --version
+RUN echo "NPM Version:" && npm --version
+
 WORKDIR /app
+ADD . /app
 COPY package*.json ./
 RUN npm i
 COPY . .
-ARG RAILWAY_STATIC_URL
-ARG PUBLIC_URL
-ARG 3002
 CMD ["npm", "start"]
