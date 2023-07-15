@@ -1,4 +1,4 @@
-FROM node:latest AS node_base
+FROM node:18-bullseye as bot
 
 RUN echo "NODE Version:" && node --version
 RUN echo "NPM Version:" && npm --version

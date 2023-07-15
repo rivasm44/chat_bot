@@ -23,6 +23,11 @@ try {
 
     const express = require("express");
     const app = express();
+
+    app.get("/", (req, res) => {
+      res.send("CAPISTRANO. Sabor que premia!");
+    });
+
     app.get("/send-message-bot", async (req, res) => {
       sendMessages(req, res, adapterProvider);
     });
