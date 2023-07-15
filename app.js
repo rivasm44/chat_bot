@@ -29,6 +29,7 @@ try {
     });
 
     app.get("/send-message-bot", async (req, res) => {
+      console.log(req);
       sendMessages(req, res, adapterProvider);
     });
     const PORT = 3002;

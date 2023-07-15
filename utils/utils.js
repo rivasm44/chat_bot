@@ -20,6 +20,28 @@ const changeTimezone = (date, ianatz) => {
   return new Date(date.getTime() - diff);
 };
 
+const numeroDeSemana = (fecha) => {
+  const DIA_EN_MILISEGUNDOS = 1000 * 60 * 60 * 24,
+    DIAS_QUE_TIENE_UNA_SEMANA = 7,
+    JUEVES = 4;
+  fecha = new Date(
+    Date.UTC(fecha.getFullYear(), fecha.getMonth(), fecha.getDate())
+  );
+  let diaDeLaSemana = fecha.getUTCDay(); // Domingo es 0, sábado es 6
+  if (diaDeLaSemana === 0) {
+    diaDeLaSemana = 7;
+  }
+  fecha.setUTCDate(fecha.getUTCDate() - diaDeLaSemana + JUEVES);
+  const inicioDelAño = new Date(Date.UTC(fecha.getUTCFullYear(), 0, 1));
+  const diferenciaDeFechasEnMilisegundos = fecha - inicioDelAño;
+  return (
+    Math.ceil(
+      (diferenciaDeFechasEnMilisegundos / DIA_EN_MILISEGUNDOS + 1) /
+        DIAS_QUE_TIENE_UNA_SEMANA
+    ) - 1
+  );
+};
+
 /*
 var here = new Date();
 var there = changeTimezone(here, "America/Toronto");
@@ -43,4 +65,4 @@ const dateFormat = () => {
   }
 };
 
-module.exports = { dateFormat };
+module.exports = { dateFormat, numeroDeSemana };

@@ -82,10 +82,15 @@ const validateId = async (id) => {
   }
 };
 
-const getAccumulated = async (id) => {
+const getAccumulated = async (id, semana) => {
   try {
+    console.log(`Semana ${semana} ID, ${id}`);
     let metricas = {};
-    const snapshot = await db.collection("puntaje").where("ID", "==", id).get();
+    const snapshot = await db
+      .collection("puntaje")
+      .where("ID", "==", id)
+      .where("SEMANA", "==", semana.toString())
+      .get();
 
     if (snapshot.empty) {
       console.log(`Datos de puntaje ----> ${id}`);
