@@ -3,6 +3,7 @@ const {
   validateId,
   getAccumulated,
 } = require("../reposotori/firestore");
+const { numeroDeSemana } = require("../utils/utils");
 const { messages } = require("../utils/descriptionMsg");
 const sendMessages = async (req, res, adapterProvider) => {
   try {
@@ -27,7 +28,10 @@ const sendMessages = async (req, res, adapterProvider) => {
 const getMetrics = async (usuario) => {
   let message = "";
   const { registro } = await validateId(usuario.ID);
-  const { metricas } = await getAccumulated(usuario.ID);
+  const { metricas } = await getAccumulated(
+    usuario.ID,
+    numeroDeSemana(new Date())
+  );
   if (metricas.CREC < registro["OBJ CREC"]) {
     message = messages("menor", usuario, metricas, registro);
   } else if (registro["OBJ CREC"] === metricas.CREC) {
