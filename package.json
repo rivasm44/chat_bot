@@ -1,27 +1,27 @@
 {
-  "name": "base-bailey-memory",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "engines": {
-    "node": ">=18.x.x"
-  },
-  "scripts": {
-    "start": "node app.js"
-  },
-  "keywords": [],
-  "dependencies": {
-    "@adiwajshing/baileys": "github:WhiskeySockets/Baileys",
-    "@adiwajshing/keyed-db": "^0.2.4",
-    "@bot-whatsapp/bot": "latest",
-    "@bot-whatsapp/cli": "latest",
-    "@bot-whatsapp/database": "latest",
-    "@bot-whatsapp/portal": "latest",
-    "@bot-whatsapp/provider": "latest",
-    "express": "^4.18.2",
-    "firebase-admin": "^11.9.0",
-    "wa-sticker-formatter": "4.3.2"
-  },
-  "author": "Omar Rivas",
-  "license": "ISC"
+    "name": "base-bailey-memory",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "engines": {
+        "node": ">=18.x.x"
+    },
+    "scripts": {
+        "start": "node app.js"
+    },
+    "keywords": [],
+    "dependencies": {
+        "@adiwajshing/baileys": "github:WhiskeySockets/Baileys",
+        "@adiwajshing/keyed-db": "^0.2.4",
+        "@bot-whatsapp/bot": "latest",
+        "@bot-whatsapp/cli": "latest",
+        "@bot-whatsapp/database": "latest",
+        "@bot-whatsapp/portal": "latest",
+        "@bot-whatsapp/provider": "latest",
+        "express": "^4.18.2",
+        "firebase-admin": "^11.9.0",
+        "wa-sticker-formatter": "4.3.2"
+    },
+    "author": "Omar Rivas",
+    "license": "ISC"
 }
