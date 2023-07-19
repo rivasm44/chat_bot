@@ -10,9 +10,11 @@ const flowMenu = addKeyword(["menu", "menú", "Menu", "Menú", "M", "m"], {
   .addAnswer(
     ["Te invitamos a revisar nuestro menu. 🙌"],
     null,
-    async (ctx, { flowDynamic }) => {
-      console.log(typeof ctx.from);
+    async (ctx, { flowDynamic, gotoFlow }) => {
+      console.log(`Buscando usuario ---> ${ctx.from}`);
       const userActive = await getUserActive("TELEFONO", ctx.from);
+      console.log(`Datos del usuario --->`);
+      console.log(userActive);
       await flowDynamic(`Bienvenido ${userActive.user.NOMBRES} ${userActive.user.APELLIDOS} de vuelta a *CAPISTRANO. Sabor que premia*. 🥳
             \n¿Cómo podemos apoyarte? 🫡
             \n👉1. Detalles de cómo participar\n👉2. Lista de premios. \n👉3. Mi puntaje.\n👉4. Dudas, comentarios o sugerencias.`);
